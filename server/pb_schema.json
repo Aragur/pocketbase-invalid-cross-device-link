@@ -1,0 +1,283 @@
+[
+    {
+        "id": "2yi8vgxdimb7b9m",
+        "name": "licenses",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "id": "l2mbwncb",
+                "name": "name",
+                "type": "text",
+                "system": false,
+                "required": true,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            }
+        ],
+        "indexes": [],
+        "listRule": "@request.auth.id != \"\"",
+        "viewRule": "@request.auth.id != \"\"",
+        "createRule": null,
+        "updateRule": null,
+        "deleteRule": null,
+        "options": {}
+    },
+    {
+        "id": "mpr20jprgr61u1w",
+        "name": "episodes",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "id": "ftsfi1f0",
+                "name": "title",
+                "type": "text",
+                "system": false,
+                "required": true,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "6ukbx7nz",
+                "name": "shortTitle",
+                "type": "text",
+                "system": false,
+                "required": true,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "fwqbezg8",
+                "name": "category",
+                "type": "relation",
+                "system": false,
+                "required": true,
+                "options": {
+                    "collectionId": "389rsns5xh5ks1n",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": []
+                }
+            },
+            {
+                "id": "pfdrork4",
+                "name": "thumbnail",
+                "type": "file",
+                "system": false,
+                "required": true,
+                "options": {
+                    "maxSelect": 1,
+                    "maxSize": 5242880,
+                    "mimeTypes": [
+                        "image/png"
+                    ],
+                    "thumbs": [
+                        "1920x1080",
+                        "760x432"
+                    ],
+                    "protected": false
+                }
+            },
+            {
+                "id": "c8zx43og",
+                "name": "description",
+                "type": "text",
+                "system": false,
+                "required": false,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "etqrfeq6",
+                "name": "license",
+                "type": "relation",
+                "system": false,
+                "required": true,
+                "options": {
+                    "collectionId": "2yi8vgxdimb7b9m",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": []
+                }
+            }
+        ],
+        "indexes": [],
+        "listRule": "@request.auth.id != \"\" && (@request.auth.licenses.id ?= license.id || @request.auth.licenses.id = \"_ADM_ALL_ACCESS\")",
+        "viewRule": "@request.auth.id != \"\" && (@request.auth.licenses.id ?= license.id || @request.auth.licenses.id = \"_ADM_ALL_ACCESS\")",
+        "createRule": null,
+        "updateRule": null,
+        "deleteRule": null,
+        "options": {}
+    },
+    {
+        "id": "389rsns5xh5ks1n",
+        "name": "categories",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "id": "gfyjf20z",
+                "name": "name",
+                "type": "text",
+                "system": false,
+                "required": false,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "2sqh9bxv",
+                "name": "license",
+                "type": "relation",
+                "system": false,
+                "required": true,
+                "options": {
+                    "collectionId": "2yi8vgxdimb7b9m",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": 1,
+                    "displayFields": []
+                }
+            },
+            {
+                "id": "ubboddhe",
+                "name": "year",
+                "type": "select",
+                "system": false,
+                "required": true,
+                "options": {
+                    "maxSelect": 1,
+                    "values": [
+                        "2023",
+                        "2022"
+                    ]
+                }
+            }
+        ],
+        "indexes": [],
+        "listRule": "@request.auth.id != \"\" && (@request.auth.licenses.id ?= license.id || @request.auth.licenses.id = \"_ADM_ALL_ACCESS\")",
+        "viewRule": "@request.auth.id != \"\" && (@request.auth.licenses.id ?= license.id || @request.auth.licenses.id = \"_ADM_ALL_ACCESS\")",
+        "createRule": null,
+        "updateRule": null,
+        "deleteRule": null,
+        "options": {}
+    },
+    {
+        "id": "_pb_users_auth_",
+        "name": "users",
+        "type": "auth",
+        "system": false,
+        "schema": [
+            {
+                "id": "users_name",
+                "name": "name",
+                "type": "text",
+                "system": false,
+                "required": false,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "fmjkqgvn",
+                "name": "licenses",
+                "type": "relation",
+                "system": false,
+                "required": false,
+                "options": {
+                    "collectionId": "2yi8vgxdimb7b9m",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": null,
+                    "displayFields": []
+                }
+            }
+        ],
+        "indexes": [],
+        "listRule": "id = @request.auth.id",
+        "viewRule": "id = @request.auth.id",
+        "createRule": null,
+        "updateRule": "id = @request.auth.id",
+        "deleteRule": "id = @request.auth.id",
+        "options": {
+            "allowEmailAuth": true,
+            "allowOAuth2Auth": false,
+            "allowUsernameAuth": false,
+            "exceptEmailDomains": null,
+            "manageRule": null,
+            "minPasswordLength": 8,
+            "onlyEmailDomains": null,
+            "requireEmail": true
+        }
+    },
+    {
+        "id": "n1ruh0x0y7ddabg",
+        "name": "tokens",
+        "type": "base",
+        "system": false,
+        "schema": [
+            {
+                "id": "8dxc8lla",
+                "name": "token",
+                "type": "text",
+                "system": false,
+                "required": true,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "lxn3h9tf",
+                "name": "licenses",
+                "type": "relation",
+                "system": false,
+                "required": true,
+                "options": {
+                    "collectionId": "2yi8vgxdimb7b9m",
+                    "cascadeDelete": false,
+                    "minSelect": null,
+                    "maxSelect": null,
+                    "displayFields": []
+                }
+            },
+            {
+                "id": "odw2axih",
+                "name": "used",
+                "type": "bool",
+                "system": false,
+                "required": false,
+                "options": {}
+            }
+        ],
+        "indexes": [
+            "CREATE UNIQUE INDEX `idx_oXi5fSj` ON `tokens` (`token`)"
+        ],
+        "listRule": null,
+        "viewRule": "",
+        "createRule": null,
+        "updateRule": null,
+        "deleteRule": null,
+        "options": {}
+    }
+]
